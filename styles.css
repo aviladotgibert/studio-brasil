@@ -1,0 +1,60 @@
+:root{
+
+/* SECTION */
+.section{padding:3rem 0}
+.section.alt{background:linear-gradient(180deg, rgba(235,230,224,0.6), transparent)}
+.section-title{font-family:'Playfair Display',serif;font-size:1.5rem;margin-bottom:.25rem}
+.section-sub{color:var(--muted);margin-bottom:1.25rem}
+
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.card{background:var(--glass);border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+.card img{width:100%;height:180px;object-fit:cover;display:block}
+.card-info{padding:.75rem}
+.card:hover{transform:translateY(-6px);box-shadow:0 12px 34px rgba(0,0,0,0.12)}
+
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.service{background:white;border-radius:12px;padding:1rem;box-shadow:var(--card-shadow)}
+
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 360px;gap:1.25rem;align-items:center}
+.about-image img{width:100%;border-radius:12px;object-fit:cover}
+
+
+/* CONTACT */
+.contact-form{background:white;padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.form-grid input,.form-grid textarea{padding:.65rem;border:1px solid #e6dfd8;border-radius:8px}
+.form-grid textarea{grid-column:1 / -1}
+.form-actions{display:flex;align-items:center;gap:1rem;margin-top:.75rem}
+.form-msg{color:var(--accent);font-weight:600}
+
+
+/* FOOTER */
+.site-footer{padding:1rem 0;margin-top:2rem;background:transparent}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted)}
+.socials a{margin-left:.5rem;text-decoration:none;color:var(--muted)}
+
+
+/* MODAL */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);opacity:0;pointer-events:none;transition:opacity .18s ease}
+.modal[aria-hidden="false"]{opacity:1;pointer-events:auto}
+.modal img{max-width:90%;max-height:80%;border-radius:10px}
+.modal-close{position:absolute;top:20px;right:20px;background:transparent;border:0;color:#fff;font-size:2rem}
+
+
+/* Responsive */
+@media (max-width:900px){
+.hero-inner{grid-template-columns:1fr;}
+.about-grid{grid-template-columns:1fr}
+.form-grid{grid-template-columns:1fr}
+}
+
+@media (max-width:700px){
+.nav-desktop{display:none}
+.burger{display:block}
+}

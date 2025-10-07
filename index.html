@@ -1,0 +1,86 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+
+
+export default function StudioBrasil() {
+const [formData, setFormData] = useState({ name: "", email: "", project: "", message: "" });
+const [formMsg, setFormMsg] = useState("");
+const [modalImg, setModalImg] = useState(null);
+
+
+const handleChange = (e) => {
+const { id, value } = e.target;
+setFormData({ ...formData, [id]: value });
+};
+
+
+const handleSubmit = async (e) => {
+e.preventDefault();
+try {
+const res = await fetch("/api/contact", {
+method: "POST",
+headers: { "Content-Type": "application/json" },
+body: JSON.stringify(formData),
+});
+const data = await res.json();
+setFormMsg(data.message || "Mensaje enviado correctamente.");
+setFormData({ name: "", email: "", project: "", message: "" });
+} catch (error) {
+setFormMsg("Hubo un error al enviar el mensaje.");
+}
+};
+
+
+const projects = [
+{
+title: "Casa Ipanema",
+desc: "Reforma integral con madera local y patios interiores.",
+img: "https://images.unsplash.com/photo-1505691723518-36a4832b65f6?q=80&w=800",
+},
+{
+title: "Apartamento Leblon",
+desc: "Interiores minimalistas con molduras modernas y vegetación.",
+img: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?q=80&w=800",
+},
+{
+title: "Studio São",
+desc: "Espacios abiertos y acabados en tonos terracota.",
+img: "https://images.unsplash.com/photo-1519710164239-da123dc03ef4?q=80&w=800",
+},
+];
+
+
+return (
+<div className="font-[Inter] bg-[#fbf9f6] text-[#222]">
+{/* Header */}
+<header className="flex justify-between items-center px-6 py-4 max-w-6xl mx-auto">
+<a href="#" className="font-[Playfair Display] text-xl text-green-800">Studio<span className="text-[#7a6b5a] ml-1">Brasil</span></a>
+<nav className="hidden md:flex space-x-6 text-[#7a6b5a]">
+<a href="#projects">Proyectos</a>
+<a href="#services">Servicios</a>
+<a href="#about">Nosotros</a>
+<a href="#contact" className="border px-3 py-1 rounded-md border-green-800 text-green-800">Contacto</a>
+</nav>
+</header>
+
+
+{/* Hero */}
+<section className="grid md:grid-cols-2 items-center gap-8 px-6 py-16 max-w-6xl mx-auto">
+<div>
+<h1 className="font-[Playfair Display] text-4xl mb-4 text-[#14220f]">Arquitectura e interiorismo con alma brasileña</h1>
+<p className="text-[#7a6b5a] mb-4">Diseños contemporáneos que combinan madera, luz natural y vegetación para crear espacios cálidos y sofisticados.</p>
+<a href="#projects" className="border border-green-800 px-4 py-2 rounded-lg text-green-800">Ver proyectos</a>
+</div>
+<motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+<img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?q=80&w=1200" alt="Sala moderna" className="rounded-xl shadow-lg" />
+</motion.div>
+</section>
+
+
+{/* Projects */}
+<section id="projects" className="py-16 px-6 max-w-6xl mx-auto">
+<h2 className="font-[Playfair Display] text-2xl mb-2">Proyectos recientes</h2>
+<p className="text-[#7a6b5a] mb-6">Selección de trabajos que muestran materiales naturales y soluciones modernas.</p>
+<div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+{projects.map((p) => (
+<motion.article key={p.title} className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg cursor-pointer" onClick={() => setModalImg(p.img)}>
